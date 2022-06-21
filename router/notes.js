@@ -12,8 +12,10 @@ notesRouter.get("/", async function (req, res) {
 });
 
 notesRouter.post("/", async function (req, res) {
-  const body = req.body;
-  let result = await postNotes(body);
+  const newPost = req.body;
+  console.log(newPost);
+  let result = await postNotes(newPost);
+//   console.log(result);
   return res.json({
     sucess: true,
     payload: result,
