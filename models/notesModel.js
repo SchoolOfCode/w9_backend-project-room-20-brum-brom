@@ -1,5 +1,10 @@
 import { query } from "../db/index.js";
 
+
+//refactor patch to handle qeury
+
+
+
 export async function getNotes() {
   const res = await query(`SELECT * FROM notes;`);
   const notesArray = res.rows;

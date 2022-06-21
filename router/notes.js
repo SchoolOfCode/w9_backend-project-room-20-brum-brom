@@ -8,6 +8,11 @@ import {
   searchNotes,
 } from "../models/notesModel.js";
 
+// day two tasks - refactor patch and probably put from id to query- use router.get as the template for this 
+
+
+
+
 const notesRouter = express.Router();
 
 notesRouter.get("/", async function (req, res) {
