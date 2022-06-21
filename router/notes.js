@@ -1,5 +1,5 @@
 import express from "express";
-import { getNotes, postNotes, deleteNotesByID, replaceNotesByID, patchNoteByID } from "../models/notesModel.js";
+import { getNotes, postNotes, deleteNotesByID, replaceNotesByID, patchNoteByID, searchNotes } from "../models/notesModel.js";
 
 const notesRouter = express.Router();
 
@@ -11,8 +11,16 @@ notesRouter.get("/", async function (req, res) {
   });
 });
 
+//we want req.query.day and rq.query.week 
 
-
+notesRouter.get("/", async function(req,res){
+    if(req.query.day!==undefined && req.query.week!==undefined){
+        let day =req.query.day
+        let week =req.query.week
+        let result = await searchNotes(day, week)
+        return res.json({ sucess: true,
+            payload: result})
+        }})
 
 notesRouter.post("/", async function (req, res) {
   const newPost = req.body;

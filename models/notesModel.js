@@ -6,6 +6,12 @@ export async function getNotes() {
   return notesArray;
 }
 
+export async function searchNotes( day, week ){
+  const res= await query(`SELECT * FROM notes WHERE day = $1 AND week =$2  RETURNING *;`,[ day, week])
+  const searchedNotes= res.rows
+  return searchedNotes
+}
+
 export async function postNotes(newPost) {
   const res = await query(
     `INSERT INTO notes(week,day,post) VALUES ($1,$2,$3)`,
