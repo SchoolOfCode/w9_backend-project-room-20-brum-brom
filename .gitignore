@@ -1,0 +1,3 @@
+//this is our gitigore for teh project- our .env will go gere
+node_modules
+.env
