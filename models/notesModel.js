@@ -6,12 +6,13 @@ export async function getNotes() {
   return notesArray;
 }
 
-export async function postNotes(body) {
+export async function postNotes(newPost) {
   const res = await query(
     `INSERT INTO notes(week,day,post) VALUES ($1,$2,$3)`,
-    [body.week, body.day, body.post]);
+    [newPost.week, newPost.day, newPost.post]
+  );
   console.log(res);
-  const newPost = res.rows;
+  //   const newPost = res.rows;
   return newPost;
 }
 
