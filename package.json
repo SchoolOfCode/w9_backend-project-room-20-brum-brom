@@ -10,7 +10,8 @@
     "db:test": "node -r dotenv/config ./db/index.js",
     "createNotesTable": "node -r dotenv/config ./db/scripts/create-notes-table.js",
     "populateNotesTable": "node -r dotenv/config ./db/scripts/populate-notes-table.js",
-    "dropNotesTable": "node -r dotenv/config ./db/scripts/drop-notes-table.js"
+    "dropNotesTable": "node -r dotenv/config ./db/scripts/drop-notes-table.js",
+    "reset":"npm run dropNotesTable && npm run createNotesTable && npm run populateNotesTable "
   },
   "repository": {
     "type": "git",
