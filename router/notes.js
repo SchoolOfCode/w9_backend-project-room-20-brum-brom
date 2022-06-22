@@ -29,6 +29,7 @@ notesRouter.get("/", async function (req, res) {
 });
 
 notesRouter.patch("/", async function (req, res) {
+  console.log(req)
   if (req.query.day !== undefined && req.query.week !== undefined) {
     let day = req.query.day;
     let week = req.query.week;
