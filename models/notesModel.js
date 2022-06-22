@@ -1,9 +1,6 @@
 import { query } from "../db/index.js";
 
-
 //refactor patch to handle qeury
-
-
 
 export async function getNotes() {
   const res = await query(`SELECT * FROM notes;`);
@@ -71,5 +68,14 @@ export async function patchNoteByID(replaceID, patchNotes) {
     );
     patchedNotes = res.rows;
   }
+  return patchedNotes;
+}
+
+export async function patchAllNotes(day, week, post, emoji, reflections) {
+  const res = await query(
+    `UPDATE notes SET post = $1, emoji=$2,reflections=$3 WHERE day=$4 AND week=$5 RETURNING *;`,
+    [post, emoji, reflections, day, week]
+  );
+  let patchedNotes = res.rows;
   return patchedNotes;
 }

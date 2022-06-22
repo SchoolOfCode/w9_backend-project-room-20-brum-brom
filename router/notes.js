@@ -6,12 +6,10 @@ import {
   replaceNotesByID,
   patchNoteByID,
   searchNotes,
+  patchAllNotes,
 } from "../models/notesModel.js";
 
-// day two tasks - refactor patch and probably put from id to query- use router.get as the template for this 
-
-
-
+// day two tasks - refactor patch and probably put from id to query- use router.get as the template for this
 
 const notesRouter = express.Router();
 
@@ -28,6 +26,18 @@ notesRouter.get("/", async function (req, res) {
     sucess: true,
     payload: result,
   });
+});
+
+notesRouter.patch("/", async function (req, res) {
+  if (req.query.day !== undefined && req.query.week !== undefined) {
+    let day = req.query.day;
+    let week = req.query.week;
+    let post = req.body.post;
+    let emoji = req.body.emoji;
+    let reflections = req.body.reflections;
+    let result = await patchAllNotes(day, week, post, emoji, reflections);
+    return res.json({ sucess: true, payload: result });
+  }
 });
 
 //we want req.query.day and rq.query.week
