@@ -34,6 +34,16 @@ todoRouter.get("/", async function (req, res) {
     });
   });
 
+  todoRouter.patch("/", async function (req, res) {
+    if (req.query.id !== undefined){
+      let id = req.body.id;
+      let text = req.body.text;
+      let complete = req.body.complete
+      let result = await patchAllTodo(id,text,complete);
+      return res.json({ sucess: true, payload: result });
+    }
+  });
+
 
 
 

@@ -3,8 +3,8 @@ import { query } from "../db/index.js";
 
 export async function getTodo() {
     const res = await query(`SELECT * FROM todo;`);
-    const notesArray = res.rows;
-    return notesArray;
+    const todoArray = res.rows;
+    return todoArray;
   }
 
   export async function postTodo(newTodo) {
@@ -26,3 +26,13 @@ export async function getTodo() {
     return deletedTodo;
   }
 
+  export async function patchAllTodo(id,text,complete) {
+   
+    const res = await query(
+      `UPDATE todo SET text = $2, complete=$3, reflections=$3 WHERE id=$1 RETURNING *;`,
+      [id,text,complete]
+    );
+    let patchedTodo = res.rows;
+    return patchedTodo;
+  }
+  
