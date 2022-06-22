@@ -29,7 +29,7 @@ notesRouter.get("/", async function (req, res) {
 });
 
 notesRouter.patch("/", async function (req, res) {
-  console.log(req)
+  console.log("request handler ran");
   if (req.query.day !== undefined && req.query.week !== undefined) {
     let day = req.query.day;
     let week = req.query.week;
@@ -81,7 +81,7 @@ notesRouter.put("/:id", async function (req, res) {
     payload: result,
   });
 });
-
+/*
 notesRouter.patch("/:id", async function (req, res) {
   const patchNotes = req.body;
   const replaceID = req.params.id;
@@ -91,5 +91,5 @@ notesRouter.patch("/:id", async function (req, res) {
     payload: result,
   });
 });
-
+*/
 export default notesRouter;
