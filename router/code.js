@@ -1,18 +1,14 @@
-import { Express} from "express";
-import { getCode } from "../models/codeModel";
+import express from "express";
+import { getCode } from "../models/codeModel.js";
 
-const codeRouter= express.Router()
+const codeRouter = express.Router();
 
-codeRouter.get('/', async function(res, req){
+codeRouter.get("/", async function (res, req) {
+  let result = await getCode();
+  return res.json({
+    sucess: true,
+    payload: result,
+  });
+});
 
-    let result = await getCode();
-    return res.json({
-      sucess: true,
-      payload: result,
-    });
-
-})
-
-
-
-export default  codeRouter 
+export default codeRouter;
