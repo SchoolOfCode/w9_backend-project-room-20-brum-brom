@@ -3,7 +3,7 @@ import { getCode } from "../models/codeModel.js";
 
 const codeRouter = express.Router();
 
-codeRouter.get("/", async function (res, req) {
+codeRouter.get("/", async function (req, res) {
   let result = await getCode();
   return res.json({
     sucess: true,
