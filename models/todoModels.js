@@ -40,7 +40,7 @@ export async function getTodo() {
 
     const res = await query(
       `UPDATE todo SET text = $2, complete=$3, WHERE id=$1 RETURNING *;`,
-      [id,text,complete]
+      [replaceID,replaceTodos.text,replaceTodos.complete]
     );
     let patchedTodo = res.rows;
     return patchedTodo

@@ -1,7 +1,7 @@
 import express from "express";
 const todoRouter = express.Router();
 
-import { getTodo, postTodo, deleteTodo } from '../models/todoModels.js'
+import { getTodo, postTodo, deleteTodo, putAllTodo } from '../models/todoModels.js'
 
 
 
