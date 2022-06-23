@@ -44,6 +44,16 @@ todoRouter.get("/", async function (req, res) {
     }
   });
 
+  todoRouter.put("/:id", async function (req, res) {
+    const replaceTodos = req.body;
+    const replaceID = req.params.id;
+    const result = await putAllTodo(replaceID, replaceTodos);
+    res.json({
+      success: true,
+      payload: result,
+    });
+  });
+
 
 
 

@@ -29,10 +29,20 @@ export async function getTodo() {
   export async function patchAllTodo(id,text,complete) {
    
     const res = await query(
-      `UPDATE todo SET text = $2, complete=$3, reflections=$3 WHERE id=$1 RETURNING *;`,
+      `UPDATE todo SET text = $2, complete=$3, WHERE id=$1 RETURNING *;`,
       [id,text,complete]
     );
     let patchedTodo = res.rows;
     return patchedTodo;
   }
   
+  export async function putAllTodo(replaceID, replaceTodos){
+
+    const res = await query(
+      `UPDATE todo SET text = $2, complete=$3, WHERE id=$1 RETURNING *;`,
+      [id,text,complete]
+    );
+    let patchedTodo = res.rows;
+    return patchedTodo
+
+  }
