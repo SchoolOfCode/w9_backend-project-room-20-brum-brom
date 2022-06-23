@@ -6,3 +6,12 @@ export async function getCode() {
     const codeArray = res.rows;
     return codeArray;
   }
+
+
+  
+export async function getCodeByID(getID) {
+  const res = await query(`SELECT * FROM codeSnippets WHERE code_id=$1;`,[getID]);
+  const getById = res.rows;
+  return getById;
+}
+

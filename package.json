@@ -15,6 +15,7 @@
     "createCodeTable": "node -r dotenv/config ./db/scripts/create-code-table.js",
     "populateCodeTable": "node -r dotenv/config ./db/scripts/populate-code-table.js",
     "dropTodoTable": "node -r dotenv/config ./db/scripts/drop-todo-table.js",
+    "makeCode":"npm run createCodeTable && npm run populateCodeTable",
     "firstRun": "node ./libs/notesSample.js",
     "reset": "npm run dropNotesTable && npm run createNotesTable && npm run populateNotesTable "
   },
