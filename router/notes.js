@@ -18,12 +18,12 @@ notesRouter.get("/", async function (req, res) {
     let day = req.query.day;
     let week = req.query.week;
     let result = await searchNotes(day, week);
-    return res.json({ sucess: true, payload: result });
+    return res.json({ success: true, payload: result });
   }
 
   let result = await getNotes();
   return res.json({
-    sucess: true,
+    success: true,
     payload: result,
   });
 });
@@ -37,28 +37,18 @@ notesRouter.patch("/", async function (req, res) {
     let emoji = req.body.emoji;
     let reflections = req.body.reflections;
     let result = await patchAllNotes(day, week, post, emoji, reflections);
-    return res.json({ sucess: true, payload: result });
+    return res.json({ success: true, payload: result });
   }
 });
 
-//we want req.query.day and rq.query.week
-
-/* notesRouter.get("/", async function(req,res){
-    if(req.query.day!==undefined && req.query.week!==undefined){
-        let day =req.query.day
-        let week =req.query.week
-        let result = await searchNotes(day, week)
-        return res.json({ sucess: true,
-            payload: result})
-        }}) */
+/*
+Routes below are not currently being utilised but may be useful in future implementations */
 
 notesRouter.post("/", async function (req, res) {
   const newPost = req.body;
-  console.log(newPost);
   let result = await postNotes(newPost);
-  //   console.log(result);
   return res.json({
-    sucess: true,
+    success: true,
     payload: result,
   });
 });
@@ -81,7 +71,7 @@ notesRouter.put("/:id", async function (req, res) {
     payload: result,
   });
 });
-/*
+
 notesRouter.patch("/:id", async function (req, res) {
   const patchNotes = req.body;
   const replaceID = req.params.id;
@@ -91,5 +81,5 @@ notesRouter.patch("/:id", async function (req, res) {
     payload: result,
   });
 });
-*/
+
 export default notesRouter;

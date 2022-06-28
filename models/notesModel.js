@@ -1,6 +1,7 @@
 import { query } from "../db/index.js";
 
 //refactor patch to handle qeury
+//Additional testing required for PostNotes function and response object
 
 export async function getNotes() {
   const res = await query(`SELECT * FROM notes;`);
@@ -17,13 +18,12 @@ export async function searchNotes(day, week) {
   return searchedNotes;
 }
 
-export async function postNotes(newPost) {
+//This does not reflect updated table (missing emoji & reflections columns)
+export async function postNotes({ week, day, post }) {
   const res = await query(
-    `INSERT INTO notes(week,day,post) VALUES ($1,$2,$3)`,
-    [newPost.week, newPost.day, newPost.post]
+    `INSERT INTO notes(week,day,post) VALUES ($1,$2,$3) RETURNING *;`,
+    [week, day, post]
   );
-  console.log(res);
-  //   const newPost = res.rows;
   return newPost;
 }
 
@@ -36,35 +36,35 @@ export async function deleteNotesByID(deleteID) {
   return deletednotes;
 }
 
-export async function replaceNotesByID(replaceID, replaceNotes) {
+export async function replaceNotesByID(replaceID, { week, day, post }) {
   const res = await query(
     `UPDATE notes SET week = $2, day = $3, post = $4 WHERE notes_id = $1 RETURNING *;`,
-    [replaceID, replaceNotes.week, replaceNotes.day, replaceNotes.post]
+    [replaceID, week, day, post]
   );
   const replacednotes = res.rows;
   return replacednotes;
 }
 
-export async function patchNoteByID(replaceID, patchNotes) {
+export async function patchNoteByID(replaceID, { day, week, post }) {
   let patchedNotes;
-  if (patchNotes.day !== undefined) {
+  if (day !== undefined) {
     const res = await query(
       `UPDATE notes SET day = $2 WHERE notes_id = $1 RETURNING *;`,
-      [replaceID, patchNotes.day]
+      [replaceID, day]
     );
     patchedNotes = res.rows;
   }
-  if (patchNotes.week !== undefined) {
+  if (week !== undefined) {
     const res = await query(
       `UPDATE notes SET week = $2 WHERE notes_id = $1 RETURNING *;`,
-      [replaceID, patchNotes.week]
+      [replaceID, week]
     );
     patchedNotes = res.rows;
   }
-  if (patchNotes.post !== undefined) {
+  if (post !== undefined) {
     const res = await query(
       `UPDATE notes SET post = $2 WHERE notes_id = $1 RETURNING *;`,
-      [replaceID, patchNotes.post]
+      [replaceID, post]
     );
     patchedNotes = res.rows;
   }
@@ -72,7 +72,6 @@ export async function patchNoteByID(replaceID, patchNotes) {
 }
 
 export async function patchAllNotes(day, week, post, emoji, reflections) {
-  console.log(day)
   const res = await query(
     `UPDATE notes SET post = $1, emoji=$2, reflections=$3 WHERE day=$4 AND week=$5 RETURNING *;`,
     [post, emoji, reflections, day, week]
