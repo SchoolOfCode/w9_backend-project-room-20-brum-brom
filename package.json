@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "nodemon -r dotenv/config app.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "db:test": "node -r dotenv/config ./db/index.js",
     "createNotesTable": "node -r dotenv/config ./db/scripts/notes/create-notes-table.js",
     "populateNotesTable": "node -r dotenv/config ./db/scripts/notes/populate-notes-table.js",
@@ -15,7 +15,7 @@
     "createCodeTable": "node -r dotenv/config ./db/scripts/code/create-code-table.js",
     "populateCodeTable": "node -r dotenv/config ./db/scripts/code/populate-code-table.js",
     "dropTodoTable": "node -r dotenv/config ./db/scripts/todo/drop-todo-table.js",
-    "makeCode":"npm run createCodeTable && npm run populateCodeTable",
+    "makeCode": "npm run createCodeTable && npm run populateCodeTable",
     "firstRun": "node ./libs/notesSample.js",
     "reset": "npm run dropNotesTable && npm run createNotesTable && npm run populateNotesTable "
   },
@@ -36,6 +36,8 @@
     "pg": "^8.7.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.16"
+    "jest": "^28.1.1",
+    "nodemon": "^2.0.16",
+    "supertest": "^6.2.3"
   }
 }
