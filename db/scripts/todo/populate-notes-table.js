@@ -1,5 +1,5 @@
-import emptyArray from "../../libs/notesSample.js";
-import { query } from "../../db/index.js";
+import emptyArray from "../../../libs/notesSample.js";
+import { query } from "../../index.js";
 
 for (let i = 0; i < emptyArray.length; i++) {
   await query(
