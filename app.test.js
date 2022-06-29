@@ -51,21 +51,21 @@ describe("Test Notes Routes Functionality", () => {
     ]);
     expect(response.body.payload).toStrictEqual(expectedPayload);
   });
-
+// this test will fail due to the patch
   test("Test ability to get a day from notes routes in app", async function () {
-    const response = await request(app).get("/notes/?week=weekTest&day=dayTest");
+    const response = await request(app).get("/notes/?week=Week6&day=Mon");
    
     const expectedResponseBody = {
       success: true,
       payload: expect.any(Object),
     };
   
-    const expectedPayload = expect.objectContaining([
+    const expectedPayload = expect.arrayContaining([
       {
-        notes_id: 98,
-        week: "weekTest",
-        day: "dayTest",
-        post: "blergh",
+        notes_id: 31,
+        week: "Week6",
+        day: "Mon",
+        post: "happy",
         emoji: null,
         reflections: null
       },
@@ -74,38 +74,27 @@ describe("Test Notes Routes Functionality", () => {
  
   });
 
-/*   test("Test ability to PATCH TO notes routes in app", async function () {
-   
-    const newPost = await Post.create({
-    week:"weekTest3",
-    day:"dayTest3",
-    post:"blergh",
-    emoji:"sad",
-    reflections:"blergh"
-    })
+  test("Runs required tests on PATCH request at /notes/?week=Week6&day=Mon", async () => {
+    const response = await request(app).patch("/notes/?week=Week6&day=Mon").send({post: "sad"});
 
-    const data = {
-      post: "happy and sad",
-    }
-
-  const response = await request(app).patch("/notes/?week=weekTest3&day=dayTest3").send(data)
+    expect(response.status).toBe(200);
 
     const expectedResponseBody = {
-      success: true,
-      payload: expect.any(Object),
-    };
+        success: true,
+        payload: expect.any(Array)
+    }
 
+    expect(response.body).toStrictEqual(expectedResponseBody);
 
-    const expectedPayload = expect.objectContaining([
-      {
-        week:"weekTest3",
-        day:"dayTest3",
-        post:"happy and sad",
-        emoji:"sad",
-        reflections:"blergh"
-      },
-    ]);
-    expect(response.body.payload.post).toStrictEqual(expectedPayload.post);
-  }) */
+    const expectedPayload = expect.arrayContaining([{
+      notes_id: 31,
+      week: "Week6",
+      day: "Mon",
+      post: "sad",
+      emoji: null,
+      reflections: null
+    }]);
+    expect(response.body.payload).toStrictEqual(expectedPayload);
+})
 
 })
