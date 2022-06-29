@@ -53,7 +53,7 @@ describe("Test Notes Routes Functionality", () => {
   });
 // this test will fail due to the patch
   test("Test ability to get a day from notes routes in app", async function () {
-    const response = await request(app).get("/notes/?week=Week6&day=Mon");
+    const response = await request(app).get("/notes/?week=Week6&day=Tue");
    
     const expectedResponseBody = {
       success: true,
@@ -62,12 +62,12 @@ describe("Test Notes Routes Functionality", () => {
   
     const expectedPayload = expect.arrayContaining([
       {
-        notes_id: 31,
+        notes_id: 32,
         week: "Week6",
-        day: "Mon",
-        post: "happy",
-        emoji: null,
-        reflections: null
+        day: "Tue",
+        post: "",
+        emoji: "",
+        reflections: ""
       },
     ]);
     expect(response.body.payload).toStrictEqual(expectedPayload);
