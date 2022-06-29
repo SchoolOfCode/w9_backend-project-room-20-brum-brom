@@ -17,6 +17,8 @@ app.use("/notes", notesRouter);
 app.use("/todo", todoRouter)
 app.use("/code", codeRouter)
 
+
+//move to another file - a server .js file - import app and start up via tthe listen 
 app.listen(port, () => {
   console.log(`example app listening on port ${port}`);
 });
