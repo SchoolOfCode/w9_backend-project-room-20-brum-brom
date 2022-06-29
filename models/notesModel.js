@@ -24,6 +24,7 @@ export async function postNotes({ week, day, post }) {
     `INSERT INTO notes(week,day,post) VALUES ($1,$2,$3) RETURNING *;`,
     [week, day, post]
   );
+  const newPost= res.rows
   return newPost;
 }
 

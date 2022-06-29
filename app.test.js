@@ -51,4 +51,61 @@ describe("Test Notes Routes Functionality", () => {
     ]);
     expect(response.body.payload).toStrictEqual(expectedPayload);
   });
-});
+
+  test("Test ability to get a day from notes routes in app", async function () {
+    const response = await request(app).get("/notes/?week=weekTest&day=dayTest");
+   
+    const expectedResponseBody = {
+      success: true,
+      payload: expect.any(Object),
+    };
+  
+    const expectedPayload = expect.objectContaining([
+      {
+        notes_id: 98,
+        week: "weekTest",
+        day: "dayTest",
+        post: "blergh",
+        emoji: null,
+        reflections: null
+      },
+    ]);
+    expect(response.body.payload).toStrictEqual(expectedPayload);
+ 
+  });
+
+/*   test("Test ability to PATCH TO notes routes in app", async function () {
+   
+    const newPost = await Post.create({
+    week:"weekTest3",
+    day:"dayTest3",
+    post:"blergh",
+    emoji:"sad",
+    reflections:"blergh"
+    })
+
+    const data = {
+      post: "happy and sad",
+    }
+
+  const response = await request(app).patch("/notes/?week=weekTest3&day=dayTest3").send(data)
+
+    const expectedResponseBody = {
+      success: true,
+      payload: expect.any(Object),
+    };
+
+
+    const expectedPayload = expect.objectContaining([
+      {
+        week:"weekTest3",
+        day:"dayTest3",
+        post:"happy and sad",
+        emoji:"sad",
+        reflections:"blergh"
+      },
+    ]);
+    expect(response.body.payload.post).toStrictEqual(expectedPayload.post);
+  }) */
+
+})
